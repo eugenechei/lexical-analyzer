@@ -1,0 +1,17 @@
+Welcome To Our Lexical Analyzer!
+
+CODE: while (t < upper) s = 22.00;
+
+OUTPUT:
+TOKEN          | LEXEME 
+------------------------------
+Keyword          while
+Separator        (
+Identifier       t
+Operator         <
+Identifier       upper
+Separator        )
+Identifier       s
+Operator         =
+Constant         22.00
+Separator        ;

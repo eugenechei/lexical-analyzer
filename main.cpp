@@ -1,19 +1,19 @@
-#include <fstream>      //file stream
-#include <iostream>     //I/O, cerr(), newln(), char
-#include <stdlib.h>     //malloc()
-#include <string>       //std::string
-#include <ctype.h>      //isdigit(int c)
-#include <vector>       //vector<datatype>
+#include <fstream>
+#include <iostream>
+#include <stdlib.h>
+#include <string>
+#include <ctype.h>
+#include <vector>
 using namespace std;
 
 //Checks if the given token is a punctuation
-bool isPunctuation(char ch) {
+bool isPunctuation(char c) {
     //Predefined set of symbols
     char symbol[] = {'(', ')', '[', ']', '{', '}', ';', ' ', '+',
                      '-', '*', '/', '>', '<', '=', '&', '|', ','};
     //Compares the given token with predefined symbols
     for (int i = 0; i < strlen(symbol); i++) {
-        if (ch == symbol[i])
+        if (c == symbol[i])
             return true;
     }
     //Fails to match. Proceeds onto the next state
@@ -21,12 +21,12 @@ bool isPunctuation(char ch) {
 }
 
 //Checks if given token is a seperator
-bool isSeparator(char ch) {
+bool isSeparator(char c) {
     //Predefined set of symbols - funct. and parameter seperators
     char separator[] = {'(', ')', '[', ']', '{', '}', ';'};
     //Compares the given token with predefined symbols
     for (int i = 0; i < strlen(separator); i++) {
-        if (ch == separator[i])
+        if (c == separator[i])
             return true;
     }
     //Fails to match. Proceeds onto the next state
@@ -56,10 +56,10 @@ bool validIdentifier(char* str) {
 }
 
 //Checks if the given character is an operator
-bool isOperator(char ch) {
+bool isOperator(char c) {
     //Compares character with operators
-    if (ch == '-' || ch == '+' || ch == '*' || ch == '/' || ch == '>' ||
-        ch == '<' || ch == '=' || ch == '|' || ch == '&')
+    if (c == '-' || c == '+' || c == '*' || c == '/' || c == '>' ||
+        c == '<' || c == '=' || c == '|' || c == '&')
        return true;
     //Fails to match. Proceeds onto the next state
     return false;
@@ -135,8 +135,8 @@ char* subStr(char* realStr, int l, int r) {
    of the tokens to generate correct and efficient executable code. */
 void lexer(char* input, ofstream& output_file) {
     //Local variables
-    int left = 0;
-    int right = 0; 
+    int l  = 0;
+    int r  = 0; 
     int id = 0;
     int len = strlen(input);
 
@@ -149,7 +149,7 @@ void lexer(char* input, ofstream& output_file) {
     output_file << "\n\nOUTPUT:\nTOKEN          | LEXEME \n";
     output_file << "------------------------------\n";
 
-    //Responsible for displaying result on stdout
+    //Responsible for displaying result on stdout - NOT REQUIRED
     cout << "Welcome To Our Lexical Analyzer!\n\nCODE: ";
         for (int i = 0; i < len; i++)
             cout << input[i];
@@ -158,24 +158,24 @@ void lexer(char* input, ofstream& output_file) {
 
     /*Breaks down the source into tokens, then goes through each function for analysis
       and categorized based off the token's unique properties */
-    while (right <= len && left <= right) {
+    while (r <= len && l <= r ) {
         //Checks if character is a special character
-        if (!isPunctuation(input[right]))
-            right++;
+        if (!isPunctuation(input[r]))
+            r++;
         //Checks if the given string is a special character
-        if (isPunctuation(input[right]) && left == right) {
+        if (isPunctuation(input[r]) && l == r) {
             //The given string is categorized as an operator
-            if (isOperator(input[right])) {
-                output_file << "Operator         " << input[right] << endl;
-                cout        << "Operator         " << input[right] << endl;
+            if (isOperator(input[r])) {
+                output_file << "Operator         " << input[r] << endl;
+                cout        << "Operator         " << input[r] << endl;
             }
-            right++;
-            left = right;
+            r++;
+            l  = r;
             //Checks if the given string for further analysis
-            } else if (isPunctuation(input[right]) && left != right
-                       || (right == len && left != right)) {
+            } else if (isPunctuation(input[r]) && l  != r
+                       || (r == len && l != r)) {
                 //Extracts and stores the substring in "sub"
-                char* sub = subStr(input, left, right - 1);
+                char* sub = subStr(input, l, r - 1);
 
                 //File writing method and displays on stdout
                 if (isKeyword(sub)) {
@@ -184,26 +184,26 @@ void lexer(char* input, ofstream& output_file) {
                 } else if (isConstant(sub)) {
                     output_file << "Constant         " << sub << endl;
                     cout        << "Constant         " << sub << endl;
-                } else if (validIdentifier(sub) && !isPunctuation(input[right - 1])) {
-                    if (input[left - 1] != ' ' && isSeparator(input[left - 1])) {
-                            output_file << "Separator        " << input[left - 1] << endl;
-                            cout        << "Separator        " << input[left - 1] << endl;
+                } else if (validIdentifier(sub) && !isPunctuation(input[r - 1])) {
+                    if (input[l - 1] != ' ' && isSeparator(input[l - 1])) {
+                            output_file << "Separator        " << input[l - 1] << endl;
+                            cout        << "Separator        " << input[l - 1] << endl;
                             id++;
                     }
                     output_file << "Identifier       " << sub << endl;
                     cout        << "Identifier       " << sub << endl;
                 }
-                if (isSeparator(input[right])) {
-                    if (input[right] != ' ' && !isOperator(input[right])) {
-                        output_file << "Separator        " << input[right] << endl;
-                        cout        << "Separator        " << input[right] << endl;
-                    } else if (input[left - 1] != ' ' && isSeparator(input[left - 1]) && id == 0) {
-                        output_file << "Separator        " << input[left - 1] << endl;
-                        cout        << "Separator        " << input[left - 1] << endl;
+                if (isSeparator(input[r])) {
+                    if (input[r] != ' ' && !isOperator(input[r])) {
+                        output_file << "Separator        " << input[r] << endl;
+                        cout        << "Separator        " << input[r] << endl;
+                    } else if (input[l - 1] != ' ' && isSeparator(input[l - 1]) && id == 0) {
+                        output_file << "Separator        " << input[l - 1] << endl;
+                        cout        << "Separator        " << input[l - 1] << endl;
                         id--;
                     }
                 }
-                left = right;
+                l  = r;
             }
         }
     return;
@@ -217,7 +217,7 @@ int main(int argc, char* argv[]) {
     char src[100];
     //Checks if input file was provided
     if (argc < 2) {
-        cerr << "ERROR: Lexical Analyzer cannot find a specified path.\nTry Again.\n";
+        cerr << "ERROR: Lexical Analyzer cannot find a specified path.\n";
         return 1;
     }
     //Verify the file is open to read
