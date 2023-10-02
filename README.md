@@ -6,7 +6,7 @@
 -------
 - Eugene Chei     - eugenechei@csu.fullerton.edu
 - Belal Skaik     - email_address
-- Jack Loague     - email_address
+- Jack Loague     - jloague@csu.fullerton.edu
 
 **How To Operate The Lexical Analyzer**
 ---------------------------------------
