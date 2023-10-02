@@ -1,0 +1,1 @@
+if (ez_quizzes < midterm) s= 823.24;
