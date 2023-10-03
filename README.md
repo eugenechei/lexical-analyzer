@@ -22,4 +22,4 @@ To compile the program, navigate to the directory containing `main.cpp` and run:
 g++ -o main main.cpp
 ```
 ## Running the Program
-This will produce an executable called `main`, which can be executed with `./main input_scode.txt`.
+This will produce an executable called `main`, which can be executed with ```bash  ./main input_scode.txt`. ```
