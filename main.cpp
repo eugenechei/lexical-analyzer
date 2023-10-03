@@ -4,6 +4,7 @@
 #include <string>
 #include <ctype.h>
 #include <vector>
+#include <cstring>
 using namespace std;
 
 //Checks if the given token is a punctuation
