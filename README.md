@@ -8,7 +8,7 @@
 - Belal Skaik     - bskaik1@csu.fullerton.edu
 - Jack Loague     - jloague@csu.fullerton.edu
 
-**How To Operate The Lexical Analyzer**
+*How To Operate The Lexical Analyzer*
 ---------------------------------------
 ## Prerequisites
 - Ensure you have a C++ compiler installed. For example, `g++` for Linux or MinGW for Windows.
