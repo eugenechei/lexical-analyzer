@@ -5,7 +5,7 @@
 **Authors**
 -------
 - Eugene Chei     - eugenechei@csu.fullerton.edu
-- Belal Skaik     - email_address
+- Belal Skaik     - bskaik1@csu.fullerton.edu
 - Jack Loague     - jloague@csu.fullerton.edu
 
 **How To Operate The Lexical Analyzer**
