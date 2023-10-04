@@ -3,6 +3,7 @@
 **Group Project 1**
 
 **GitHub Repository Link**
+----------
 https://github.com/eugenechei/lexical-analyzer
 
 **Authors**
