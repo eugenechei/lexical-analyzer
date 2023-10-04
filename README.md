@@ -2,6 +2,9 @@
 # Compilers and Languages
 **Group Project 1**
 
+**GitHub Repository Link**
+https://github.com/eugenechei/lexical-analyzer
+
 **Authors**
 -------
 - Eugene Chei     - eugenechei@csu.fullerton.edu
